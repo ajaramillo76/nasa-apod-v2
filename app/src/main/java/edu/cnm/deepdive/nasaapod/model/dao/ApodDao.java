@@ -32,7 +32,9 @@ public interface ApodDao {
       + "        GROUP BY \n"
       + "            apod_id\n"
       + "    ) AS acc \n"
-      + "    ON acc.apod_id = a.apod_id;";
+      + "    ON acc.apod_id = a.apod_id \n"
+      + "ORDER BY \n"
+      + "     a.date DESC;";
 
   @Insert
   Single<Long> insert(Apod apod);
