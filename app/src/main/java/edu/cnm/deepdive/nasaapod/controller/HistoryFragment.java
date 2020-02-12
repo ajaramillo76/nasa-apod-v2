@@ -2,7 +2,6 @@ package edu.cnm.deepdive.nasaapod.controller;
 
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.nasaapod.R;
-import edu.cnm.deepdive.nasaapod.model.pojo.ApodWithStats;
 import edu.cnm.deepdive.nasaapod.view.ApodAdapter;
 import edu.cnm.deepdive.nasaapod.viewmodel.MainViewModel;
 
@@ -37,7 +35,8 @@ public class HistoryFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     viewModel.getAllApodSummaries().observe(getViewLifecycleOwner(), (apods) -> {
-      ApodAdapter adapter = new ApodAdapter(getContext(), apods);
+      ApodAdapter adapter = new ApodAdapter(getContext(), apods, (v, apod, pos) ->
+          ((MainActivity) getActivity()).loadApod(apod.getDate()));
       apodList.setAdapter(adapter);
     });
   }
