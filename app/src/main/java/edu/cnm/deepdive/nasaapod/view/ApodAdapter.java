@@ -50,7 +50,7 @@ public class ApodAdapter extends ArrayAdapter<ApodWithStats> {
     if (apod.getApod().getMediaType() == MediaType.IMAGE) {
       Picasso.get().load(apod.getApod().getUrl()).into(thumbnail);
     } else {
-      thumbnail.setImageResource(R.drawable.ic_slow_motion_video_black_24dp);
+      thumbnail.setImageResource(R.drawable.ic_slow_motion_video);
     }
     thumbnail.setContentDescription(apod.getApod().getTitle());
     view.setOnClickListener((v) -> listener.onClick(v, apod.getApod(), position));

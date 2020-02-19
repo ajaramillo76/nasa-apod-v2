@@ -11,14 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.nasaapod.R;
 import edu.cnm.deepdive.nasaapod.view.ApodAdapter;
+import edu.cnm.deepdive.nasaapod.view.ApodRecyclerAdapter;
 import edu.cnm.deepdive.nasaapod.viewmodel.MainViewModel;
 
 
 public class HistoryFragment extends Fragment {
 
-  private ListView apodList;
+  private RecyclerView apodList;
   private MainViewModel viewModel;
 
   @Override
@@ -35,7 +37,7 @@ public class HistoryFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     viewModel.getAllApodSummaries().observe(getViewLifecycleOwner(), (apods) -> {
-      ApodAdapter adapter = new ApodAdapter(getContext(), apods, (v, apod, pos) ->
+      ApodRecyclerAdapter adapter = new ApodRecyclerAdapter(getContext(), apods, (v, apod, pos) ->
           ((MainActivity) getActivity()).loadApod(apod.getDate()));
       apodList.setAdapter(adapter);
     });
